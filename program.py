@@ -1,3 +1,7 @@
+# Name: Landon Lamie
+# Class: CIS 226 T-Th
+# Date: 10/01/2024
+
 """Program code"""
 
 # First-party imports
@@ -33,7 +37,7 @@ def main(*args):
     maze_solver = MazeSolver()
 
     # Create the second maze by transposing the first maze
-    maze2 = transpose_maze(maze1)
+    maze2 = transpose_maze(maze1) # May need to make a copy of this list ([:])
 
     # Solve the original maze
     maze_solver.solve_maze(maze1, X_START, Y_START)

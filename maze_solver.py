@@ -1,3 +1,7 @@
+# Name: Landon Lamie
+# Class: CIS 226 T-Th
+# Date: 10/01/2024
+
 """Maze Solver Module"""
 
 
@@ -14,6 +18,8 @@ class MazeSolver:
         # NOTE: Though not required, you may wan to define some class level
         # variables here that you are able to access and set anywhere during
         # recursion. This is why the init constructor is defined here for you.
+
+        # Make a flag for when the puzzle is solved (LL)
         pass
 
     def solve_maze(self, maze, x_start, y_start):

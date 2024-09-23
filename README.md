@@ -2,7 +2,7 @@
 
 ## Author
 
-
+Landon Lamie
 
 ## Description
 
@@ -56,8 +56,8 @@ Don't forget that you must have a base case for your recursive method or you wil
 
 ## Outside Resources Used
 
-
+None
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-
+None
