@@ -29,7 +29,16 @@ class MazeSolver:
         than code in the body."""
         pass
 
-    def _maze_traversal(self):
+    def _maze_traversal(self, current_y, current_x):
+        # Move down
+        # I need to move from [0][0] to [1][0].  This is [y][x].
+        # Move up
+        # I need to move from [1][0] to [0][0].  This is [y][x].
+        # Move right
+        # I need to move from [0][0] to [0][1].  This is [y][x].
+        # Move left
+        # I need to move from [0][1] to [0][0].  This is [y][x].
+
         """This should be the recursive method that gets called to solve the maze.
         Feel free to have it return something if you would like. But, it can be
         done without having it return anything. Also feel free to change the
