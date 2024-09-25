@@ -48,5 +48,19 @@ def main(*args):
 
 def transpose_maze(maze_to_transpose):
     # X become Y and Y becomes X.  0,0 stays.  1,0 becomes 0,1.  1,2 becomes 2,1
-    maze_transposed = []
-    return []
+    copy_of_maze = maze_to_transpose[:]
+    transposed_maze = []
+    #Break the list of list down into rows
+    for row_index in range(len(copy_of_maze[0])):
+        new_row = []
+        # Break the list into columns
+        for col_index in range(len(copy_of_maze)):
+            # Create the new transposed rows, and append it to the empty "new_row" list
+            new_row.append(copy_of_maze[col_index][row_index])
+        # After each row iteration, you append the new transposed list to the empty transposed maze
+        transposed_maze.append(new_row)
+    # To make the maze appear as a maze again, and not one long list.
+    for row in transposed_maze:
+        print(row)
+    
+
