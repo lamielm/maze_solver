@@ -23,28 +23,51 @@ class MazeSolver:
         pass
 
     def solve_maze(self, maze, x_start, y_start):
-        """This is the public method that will allow someone to use this class to solve the maze.
-        Feel free to change the return type, or add more parameters if you like.
-        But, it can be done exactly as it is here without adding anything other
-        than code in the body."""
-        pass
-
-    def _maze_traversal(self, current_y, current_x):
+            self._maze_traversal(maze, x_start, y_start)
+        
+    def _maze_traversal(self, maze, current_y, current_x):
         # Move down
         # I need to move from [0][0] to [1][0].  This is [y][x].
+        #       [Current_y + 1][current_x]
         # Move up
         # I need to move from [1][0] to [0][0].  This is [y][x].
+        #       [Current_y - 1][current_x]
         # Move right
         # I need to move from [0][0] to [0][1].  This is [y][x].
+        #       [Current_y][current_x + 1]
         # Move left
         # I need to move from [0][1] to [0][0].  This is [y][x].
+        #       [Current_y][current_x - 1]
+        
+        # Base case  Each is looking for values outside of the available index's of the maze
+        complete = True
+        print()
+        while complete == True:
+            if current_y < 0 or current_y >= len(maze) or current_x < 0 or current_x >= len(maze[0]):
+                complete = False
+                print(f"You've successfully navigated the maze (maybe)")
+                exit()
+            
+            # Turn the spot X if it's a dot (new)            
 
-        """This should be the recursive method that gets called to solve the maze.
-        Feel free to have it return something if you would like. But, it can be
-        done without having it return anything. Also feel free to change the
-        signature to take in parameters that you might need.
+            if maze[current_y][current_x] == ".":
+                    maze[current_y][current_x] = "X"
+            # Turn the spot O if it's an X (not new, back tracking)
+            else:
+                return
+            
+            for row in maze:
+                print(" ".join(row))
+            # Recursive call to go down
+            self._maze_traversal(maze, current_y + 1, current_x)
+            # Recursive call to go right
+            self._maze_traversal(maze, current_y, current_x + 1)
+            # Recursive call to go up
+            self._maze_traversal(maze, current_y - 1, current_x)
+            # Recursive call to go left
+            self._maze_traversal(maze, current_y, current_x - 1)
 
-        This is only a very small starting point.
-        More than likely you will need to pass in at a minimum the current position
-        in X and Y maze coordinates. EX: _maze_traversal(current_x, current_y)"""
-        pass
+            maze[current_y][current_x] = "O"
+            return
+        
+
