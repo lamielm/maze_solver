@@ -16,7 +16,6 @@ class MazeSolver:
         """Constructor for MazeSolver"""
         # Allows for a flag to be set for whether to continue the recursion steps, or to return to previous branch (not sure terminology, but step back out essentially)
         self.status = status
-        pass
 
     def solve_maze(self, maze, x_start, y_start):
             self._maze_traversal(maze, x_start, y_start)
@@ -37,22 +36,24 @@ class MazeSolver:
         
         # This flag helps back out of recursion, and will turn to "complete" once the base case is met.
         if self.status == "incomplete":
-            # Base case  Each is looking for values outside of the available index's of the maze
+            # Base case  Each is looking for values outside of the available index's of the maze.
             if current_y < 0 or current_y >= len(maze) or current_x < 0 or current_x >= len(maze[0]):
                 print(f"You've successfully navigated the maze (maybe)")
                 self.status = "complete"
 
-            # Turn the spot X if it's a dot (new)            
+            # Turn the spot X if it's a dot (new undiscovered)            
             else:
                 if maze[current_y][current_x] == ".":
                         maze[current_y][current_x] = "X"
-                # Turn the spot O if it's an X (not new, back tracking)
-                else:
-                    return
                 
+                else:
+                    # Return to the last call stack and continue
+                    return
+                # Used to print the maze when a . is turned to an X (Os will be printed in the next successful . to X transition)
                 for row in maze:
                     print(" ".join(row))
 
+                #Used to separate each maze reference
                 print()
 
                 # Recursive call to go down
@@ -63,7 +64,8 @@ class MazeSolver:
                 self._maze_traversal(maze, current_y - 1, current_x)
                 # Recursive call to go left
                 self._maze_traversal(maze, current_y, current_x - 1)
-
+                
+                # Turn the spot O if it's an X (not new, back tracking)
                 maze[current_y][current_x] = "O"
                 return        
 

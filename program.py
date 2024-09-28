@@ -37,13 +37,27 @@ def main(*args):
     maze_solver = MazeSolver()
 
     # Create the second maze by transposing the first maze
-    #maze2 = transpose_maze(maze1)  # May need to make a copy of this list ([:])
+    maze2 = transpose_maze(maze1)  # May need to make a copy of this list ([:])
+    print(f"Choices: 1 for normal maze, 2 for transposed maze")
+   
+    user_selection = ""
 
-    # Solve the original maze
-    maze_solver.solve_maze(maze1, X_START, Y_START)
+    # UI for choosing regular or transposed maze
+    while user_selection != "1" or user_selection != "2":
+        user_selection = input(f"What would you like to solve?\n>")
 
-    # Solve the transposed maze
-    #maze_solver.solve_maze(maze2, X_START, Y_START)
+        if user_selection == "1":
+            # Solve the original maze
+            print(f"Printing Original Maze")
+            maze_solver.solve_maze(maze1, X_START, Y_START)
+            return
+        elif user_selection == "2":
+            # Solve the transposed maze
+            print(f"Printing Transposed Maze")
+            maze_solver.solve_maze(maze2, X_START, Y_START)
+            return
+        else:
+            print("Invalid input, try again")
 
 
 def transpose_maze(maze_to_transpose):
@@ -59,8 +73,6 @@ def transpose_maze(maze_to_transpose):
             new_row.append(copy_of_maze[col_index][row_index])
         # After each row iteration, you append the new transposed list to the empty transposed maze
         transposed_maze.append(new_row)
-    # To make the maze appear as a maze again, and not one long list.
-    for row in transposed_maze:
-        print(row)
+    return transposed_maze
     
 
