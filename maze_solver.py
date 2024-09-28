@@ -12,14 +12,10 @@ class MazeSolver:
     A print maze method would be very useful, and probably necessary to print the solution.
     If you are real ambitious, you could make a separate class to handle that."""
 
-    def __init__(self):
+    def __init__(self, status="incomplete"):
         """Constructor for MazeSolver"""
-
-        # NOTE: Though not required, you may wan to define some class level
-        # variables here that you are able to access and set anywhere during
-        # recursion. This is why the init constructor is defined here for you.
-
-        # Make a flag for when the puzzle is solved (LL)
+        # Allows for a flag to be set for whether to continue the recursion steps, or to return to previous branch (not sure terminology, but step back out essentially)
+        self.status = status
         pass
 
     def solve_maze(self, maze, x_start, y_start):
@@ -39,35 +35,35 @@ class MazeSolver:
         # I need to move from [0][1] to [0][0].  This is [y][x].
         #       [Current_y][current_x - 1]
         
-        # Base case  Each is looking for values outside of the available index's of the maze
-        complete = True
-        print()
-        while complete == True:
+        # This flag helps back out of recursion, and will turn to "complete" once the base case is met.
+        if self.status == "incomplete":
+            # Base case  Each is looking for values outside of the available index's of the maze
             if current_y < 0 or current_y >= len(maze) or current_x < 0 or current_x >= len(maze[0]):
-                complete = False
                 print(f"You've successfully navigated the maze (maybe)")
-                exit()
-            
+                self.status = "complete"
+
             # Turn the spot X if it's a dot (new)            
-
-            if maze[current_y][current_x] == ".":
-                    maze[current_y][current_x] = "X"
-            # Turn the spot O if it's an X (not new, back tracking)
             else:
-                return
-            
-            for row in maze:
-                print(" ".join(row))
-            # Recursive call to go down
-            self._maze_traversal(maze, current_y + 1, current_x)
-            # Recursive call to go right
-            self._maze_traversal(maze, current_y, current_x + 1)
-            # Recursive call to go up
-            self._maze_traversal(maze, current_y - 1, current_x)
-            # Recursive call to go left
-            self._maze_traversal(maze, current_y, current_x - 1)
+                if maze[current_y][current_x] == ".":
+                        maze[current_y][current_x] = "X"
+                # Turn the spot O if it's an X (not new, back tracking)
+                else:
+                    return
+                
+                for row in maze:
+                    print(" ".join(row))
 
-            maze[current_y][current_x] = "O"
-            return
-        
+                print()
+
+                # Recursive call to go down
+                self._maze_traversal(maze, current_y + 1, current_x)
+                # Recursive call to go right
+                self._maze_traversal(maze, current_y, current_x + 1)
+                # Recursive call to go up
+                self._maze_traversal(maze, current_y - 1, current_x)
+                # Recursive call to go left
+                self._maze_traversal(maze, current_y, current_x - 1)
+
+                maze[current_y][current_x] = "O"
+                return        
 
